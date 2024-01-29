@@ -1,5 +1,6 @@
--- New cases and new deaths
---show what percentages of people got Covid
+/*THIS IS My First Project With SQL where I take Covid data from "https://ourworldindata.org/explorers/coronavirus-data-explorer". 
+Took the data in Excel file did a little bit cleaning creates two different XLSX files namely 'Deaths' and 'Vaccination' 
+upload to "Microsoft SQL Server Management 2019" and practice SQL queries.
 
 select location, date, population,total_cases,new_cases,new_deaths, (total_cases/population)*100 as casesPercentage
 from Deaths
