@@ -10,8 +10,8 @@
 --Blog used: https://techtfq.com/blog/practice-writing-sql-queries-using-real-dataset
 --Data set have two csv files “athlete_events.csv“ and “noc_regions.csv“. 
 --The files are converted into XLSX and then imported into Microsoft SQL Server.
---into two separates tables athlete_events renamed as OLYMPICS_HISTORY
--- and noc_regions renamed as OLYMPICS_HISTORY_NOC_REGIONS
+--into two separates tables athlete_events renamed as OLYMPICS_HISTORY oh
+-- and noc_regions renamed as OLYMPICS_HISTORY_NOC_REGIONS nr
  
 ----------------------------------------------------------------------------------------
 
