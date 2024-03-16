@@ -372,3 +372,63 @@ PIVOT
   SUM(TotalMedals) FOR Medal IN ([Bronze], [Gold], [Silver])
 ) AS PivotTable
 ORDER BY Gold DESC, Silver DESC, Bronze DESC; 
+
+------------------------------------------------------------------
+-- Task 15: List down total gold, silver and bronze medals won by each country corresponding to each olympic games.
+-- tables needed OLYMPICS_HISTORY oh , OLYMPICS_HISTORY_NOC_REGIONS  nr
+-- column needed nr.region, Games, Medal
+-- will need to have a PIVOT
+-- Step 1: pull medals for each games for each country i.e use filter where Medal <> 'NA'
+
+select Country, 
+GameYear,
+coalesce(Gold,0) as Gold, 
+coalesce(Silver,0) as Silver,
+coalesce(Bronze,0) as Bronze
+from (
+select nr.region as Country, Games as GameYear, Medal, count(1) as MedalCount
+from OLYMPICS_HISTORY oh
+join OLYMPICS_HISTORY_NOC_REGIONS nr
+on oh.NOC = nr.NOC
+where Medal <> 'NA'
+group by nr.region, Games, Medal
+) as BaseTable
+
+PIVOT (
+Sum(MedalCount) for Medal in ([Gold],[Silver],[Bronze])
+) as PivotTable
+
+-----------------------------------------------------------------
+-- Task 16. Identify which country won the most gold, most silver and most bronze medals in each olympic games.
+-- tables needed OLYMPICS_HISTORY oh , OLYMPICS_HISTORY_NOC_REGIONS  nr
+-- column needed nr.region, Games, Medal
+-- step 1: pull out Gold, Silver
+
+with temp as (
+select Country, 
+Games,
+coalesce(Gold,0) as Gold,
+coalesce(Silver,0) as Silver,
+coalesce(Bronze,0) as Bronze
+from 
+(
+select nr.region as Country, Games, Medal, count(1) as MedalCount
+from OLYMPICS_HISTORY oh
+join OLYMPICS_HISTORY_NOC_REGIONS nr
+on oh.NOC = nr.NOC
+where medal <> 'NA'
+group by nr.region, Games, Medal
+) as BaseTable
+
+pivot (
+sum(MedalCount) for medal in ([Gold],[Silver],[Bronze])
+) as PivotTable
+
+)
+
+select distinct Games, 
+concat(first_value(Country) over (partition by Games order by Gold desc),'-',FIRST_VALUE(Gold) over (partition by Games order by Gold desc)) as max_gold
+,concat(first_value(Country) over (partition by Games order by Silver desc),'-',FIRST_VALUE(Silver) over (partition by Games order by Silver desc)) as max_silver
+,concat(first_value(Country) over (Partition by Games order by Bronze desc),'-',FIRST_VALUE(Bronze) over (partition by Games order by Bronze desc)) as max_bronze
+from temp
+order by Games
