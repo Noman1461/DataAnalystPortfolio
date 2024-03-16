@@ -2,7 +2,7 @@
 ----------This is Semi-Guided Project, I try to solve the query on my own first---------
 ----------------------But if I couldn't then I would take help---------------------------
 -----------------------This project has a total of 20 tasks----------------------------
-
+--completed tasks 14/20
 -----------------------------------------------------------------------------------------
 
 --The dataset is taken from kaggle called: "120 years of Olympics History"
