@@ -1,3 +1,6 @@
+-- This is my First Project, This is just a basic project.
+-- nothing special about it, but i learn a lot of begineer concept in it
+-- such as Group By, Casting, and With CTE.
 -- New cases and new deaths
 --show what percentages of people got Covid
 
