@@ -1,5 +1,9 @@
 /*This is my 2nd project in SQL, Here I have NashilleHousing data. 
-This project has a lot of data cleaning.*/
+This guided project has a lot of data cleaning.
+I learn a lot of concepts that a data anlayst should know
+such as standarizing format, populating missing values etc
+Tasks: 6/6
+Date completed 16-Jan-2024*/
 
 
 select *
